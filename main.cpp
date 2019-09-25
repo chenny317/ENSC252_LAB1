@@ -10,13 +10,21 @@
  *data from a file, so that you can focus on creating
  *and manipulating classes and objects
  */
-int main(){
+int main()
+{
   //Read the domestic-stu.txt file and exit if failed
   string line;
+	
+  DomesticStudent Dstudent();
+  InternationalStudent Istudent();
+	
+	
   ifstream domesticFile("domestic-stu.txt");
-  if(!domesticFile.is_open()) {
+  if(!domesticFile.is_open()) 
+  {
     cout << "Unable to open file domestic-stu.txt" << endl;
     return -1;
+	 
   }
 
   //Read the first line of domestic-stu.txt, which specifies
@@ -33,6 +41,7 @@ int main(){
    *print the object content to the screen
    */
   int stu_count = 1;
+  int ID_count = 0;
   while( getline(domesticFile, line) ) {
     /*process each line, get each field separated by a comma.
      *We use istringstream to handle it.
@@ -63,12 +72,15 @@ int main(){
     getline(ss, s_researchScore, ',');
     researchScore = atoi(s_researchScore.c_str());
 
+    Dstudent.setID(20200000 + ID_count);
     //print the student info to the screen
     cout << "Domestic student " << stu_count << " " << firstName << " " 
 	 << lastName << " from " << province << " province has cgpa of "
-	 << cgpa << ", and research score of " << researchScore << endl;
+	 << cgpa << ", and research score of " << researchScore << ", and the assigned ID is" << Dstudent.getID() <<endl;
 
     stu_count++;
+    ID_count++; 
+	  
   }
 
   //close your file
